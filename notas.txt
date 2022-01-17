@@ -1,0 +1,18 @@
+- Podemos usar el comando: php artisan migrate:refresh en caso que necesitemos remigrar.
+
+- Cuando creamos tablas con llave foránea en las migraciones, podemos usar cualquiera de las siguientes instrucciones:
+$table->foreign('id_categoria')->references('id')->on('categorias');
+$table->foreignId('id_categoria')->nullable()->constrained('categorias')->cascadeOnUpdate()->nullOnDelete();
+
+- Dentro de los modelos podemos expresar que una tabla tiene relación con otra de esta forma:
+En la tabla categorias:
+public function productos()
+{
+    return $this->hasMany(Producto::class, 'id');
+}
+
+En la tabla productos:
+public function categorias()
+{
+    return $this->belongsTo(Categoria::class, 'id_categoria');
+}
